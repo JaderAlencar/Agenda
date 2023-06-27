@@ -12,8 +12,8 @@ public class DAOFactory {
 
     private static PacienteDAO pDAO = new PacienteDAO();
     private static MedicoDAO mDAO = new MedicoDAO();
-    public static ConsultaDAO cDAO = new ConsultaDAO();
-    public static AgendaDAO aDAO = new AgendaDAO();
+    private static ConsultaDAO cDAO = new ConsultaDAO();
+    private static AgendaDAO aDAO = new AgendaDAO();
 
     public static PacienteDAO getPacienteDAO() {
         return pDAO;
@@ -21,15 +21,17 @@ public class DAOFactory {
 
     public static MedicoDAO getMedicoDAO() {
         return mDAO;
-
     }
 
-    public static ConsultaDAO ConsultaDAO() {
+    public static ConsultaDAO getConsultaDAO() {
         return cDAO;
     }
 
-    public static AgendaDAO AgendaDAO() {
+    public static AgendaDAO getAgendaDAO() {
         return aDAO;
     }
 
+    public static ConsultaDAO ConsultaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

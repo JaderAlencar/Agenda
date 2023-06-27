@@ -6,6 +6,8 @@ package Model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -19,6 +21,8 @@ public class Consulta {
     private String horario;
     private Paciente paciente;
     private Medico medico;
+    private LocalDate dataConsulta;
+    private LocalTime horarioConsulta;
 
     public Consulta() {
     }
@@ -34,6 +38,13 @@ public class Consulta {
         this.paciente = paciente;
         this.medico = medico;
     }
+
+    public Consulta(LocalDate dataConsulta, LocalTime horarioConsulta, Paciente paciente, Medico medico) {
+    this.dataConsulta = dataConsulta;
+    this.horarioConsulta = horarioConsulta;
+    this.paciente = paciente;
+    this.medico = medico;
+}
 
     public int getIdConsulta() {
         return idConsulta;

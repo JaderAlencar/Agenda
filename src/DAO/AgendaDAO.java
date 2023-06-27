@@ -15,14 +15,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author jader.costa
  */
 public class AgendaDAO {
-    
-    
+
+    private java.sql.Date convertToSqlDate(java.util.Date data) {
+        return new java.sql.Date(data.getTime());
+    }
 
     public void cadastrarAgendaDAO(Agenda aVO) {
         try {
@@ -30,7 +32,7 @@ public class AgendaDAO {
             String sql = "INSERT INTO agendas VALUES (null, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
 
-            pst.setDate(1, new Date(aVO.getData().getTime()));
+            pst.setDate(1, new java.sql.Date(aVO.getData().getTime()));
             pst.setString(2, aVO.getHorario());
             pst.setInt(3, aVO.getPaciente().getIdPaciente());
             pst.setInt(4, aVO.getMedico().getIdMedico());
@@ -55,7 +57,7 @@ public class AgendaDAO {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Agenda a = new Agenda();
-                a.setIdAgenda(rs.getInt("idAgenda"));
+                a.setAgenda(rs.getInt("idAgenda"));
                 a.setData(rs.getDate("data"));
                 a.setHorario(rs.getString("horario"));
 
@@ -87,7 +89,7 @@ public class AgendaDAO {
             pst.setInt(1, idAgenda);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                a.setIdAgenda(rs.getInt("idAgenda"));
+                a.setAgenda(rs.getInt("idAgenda"));
                 a.setData(rs.getDate("data"));
                 a.setHorario(rs.getString("horario"));
 
@@ -118,7 +120,7 @@ public class AgendaDAO {
             pst.setString(2, aVO.getHorario());
             pst.setInt(3, aVO.getPaciente().getIdPaciente());
             pst.setInt(4, aVO.getMedico().getIdMedico());
-            pst.setInt(5, aVO.getIdAgenda());
+            pst.setInt(5, aVO.getAgenda());
             pst.executeUpdate();
 
             pst.close();
@@ -143,23 +145,22 @@ public class AgendaDAO {
         }
     }
 
-    public ArrayList<Agenda> getAgendasPorMedico(int idMedico) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agendarConsulta(Consulta consulta) {
+
+        try (Connection con = CConexao.getConexao(); PreparedStatement pst = con.prepareStatement("INSERT INTO consultas (data, horario, medico_id, paciente_id) VALUES (?, ?, ?, ?)")) {
+            pst.setDate(1, (Date) consulta.getData());
+            pst.setString(2, consulta.getHorario());
+            pst.setInt(3, consulta.getMedico().getIdMedico());
+            pst.setInt(4, consulta.getPaciente().getIdPaciente());
+
+            pst.executeUpdate();
+
+            System.out.println("Consulta agendada com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao agendar consulta: " + e.getMessage());
+        }
     }
 
-    public ArrayList<Agenda> AgendasPorData(java.util.Date data) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
 
-    public ArrayList<Agenda> AgendasPorMedico(int idMedico) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public boolean agendarConsulta(Consulta consulta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public List<Consulta> listarConsultas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

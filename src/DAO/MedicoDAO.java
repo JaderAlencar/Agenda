@@ -5,6 +5,7 @@
 package DAO;
 
 import Conexao.CConexao;
+import Model.Agenda;
 import Model.Medico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -159,5 +160,9 @@ public class MedicoDAO {
         medico.setTelefone(resultSet.getString("telefone"));
         medico.setEmail(resultSet.getString("email"));
         return medico;
+    }
+
+    public List<Agenda> getAgendas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

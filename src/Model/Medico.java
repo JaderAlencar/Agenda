@@ -91,6 +91,14 @@ public class Medico {
     public String toString() {
         return "Medico{" + "idMedico=" + idMedico + ", senha=" + senha + ", nome=" + nome + ", crm=" + crm + ", especialidade=" + especialidade + ", telefone=" + telefone + ", email=" + email + '}';
     }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getAgendas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
     

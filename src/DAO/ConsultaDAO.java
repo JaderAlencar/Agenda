@@ -260,14 +260,98 @@ public class ConsultaDAO {
     }
 
     public ArrayList<Consulta> Consultas(int idPaciente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Consulta> consultas = new ArrayList<>();
+        try {
+            Connection con = CConexao.getConexao();
+            String sql = "SELECT * FROM consultas WHERE idPaciente = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idPaciente);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Consulta c = new Consulta();
+                c.setIdConsulta(rs.getInt("idConsulta"));
+                c.setData(rs.getDate("data"));
+                c.setHorario(rs.getString("horario"));
+
+                PacienteDAO pacienteDAO = new PacienteDAO();
+                Paciente paciente = pacienteDAO.getPacienteById(rs.getInt("idPaciente"));
+                c.setPaciente(paciente);
+
+                MedicoDAO medicoDAO = new MedicoDAO();
+                Medico medico = medicoDAO.getMedicoById(rs.getInt("idMedico"));
+                c.setMedico(medico);
+
+                consultas.add(c);
+            }
+            rs.close();
+            pst.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar consultas por paciente: " + e.getMessage());
+        }
+        return consultas;
     }
 
     public Consulta ConsultaByDoc(int idConsulta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Consulta c = new Consulta();
+        try {
+            Connection con = CConexao.getConexao();
+            String sql = "SELECT * FROM consultas WHERE idConsulta = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idConsulta);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                c.setIdConsulta(rs.getInt("idConsulta"));
+                c.setData(rs.getDate("data"));
+                c.setHorario(rs.getString("horario"));
+
+                PacienteDAO pacienteDAO = new PacienteDAO();
+                Paciente paciente = pacienteDAO.getPacienteById(rs.getInt("idPaciente"));
+                c.setPaciente(paciente);
+
+                MedicoDAO medicoDAO = new MedicoDAO();
+                Medico medico = medicoDAO.getMedicoById(rs.getInt("idMedico"));
+                c.setMedico(medico);
+            }
+            rs.close();
+            pst.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar consulta por ID: " + e.getMessage());
+        }
+        return c;
     }
 
     public ArrayList<Consulta> Consulta(Consulta ConsultaByDoc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Consulta> consultas = new ArrayList<>();
+        try {
+            Connection con = CConexao.getConexao();
+            String sql = "SELECT * FROM consultas WHERE idMedico = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, ConsultaByDoc.getMedico().getIdMedico());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Consulta c = new Consulta();
+                c.setIdConsulta(rs.getInt("idConsulta"));
+                c.setData(rs.getDate("data"));
+                c.setHorario(rs.getString("horario"));
+
+                PacienteDAO pacienteDAO = new PacienteDAO();
+                Paciente paciente = pacienteDAO.getPacienteById(rs.getInt("idPaciente"));
+                c.setPaciente(paciente);
+
+                MedicoDAO medicoDAO = new MedicoDAO();
+                Medico medico = medicoDAO.getMedicoById(rs.getInt("idMedico"));
+                c.setMedico(medico);
+
+                consultas.add(c);
+            }
+            rs.close();
+            pst.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar consultas por médico: " + e.getMessage());
+        }
+        return consultas;
     }
 }

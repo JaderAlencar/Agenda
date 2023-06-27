@@ -14,19 +14,25 @@ import java.util.List;
  */
 public class Agenda {
 
-    private int idAgenda;
+    private int Agenda;
     private Date data;
     private String horario;
     private Paciente paciente;
     private Medico medico;
-    private List<Consulta> consultas;
+    private List<Consulta> consultasA;
 
     // Construtores, getters, setters e métodos adicionais...
+
     public Agenda() {
     }
 
-    public Agenda(Date data, String horario, Paciente paciente, Medico medico, List<Consulta> consultas) {
+    private List<Consulta> consultas;
+    {
+        consultas = new ArrayList<>();
+    }
 
+    public Agenda(int Agenda, Date data, String horario, Paciente paciente, Medico medico, List<Consulta> consultas) {
+        this.Agenda = Agenda;
         this.data = data;
         this.horario = horario;
         this.paciente = paciente;
@@ -34,12 +40,12 @@ public class Agenda {
         this.consultas = consultas;
     }
 
-    public int getIdAgenda() {
-        return idAgenda;
+    public int getAgenda() {
+        return Agenda;
     }
 
-    public void setIdAgenda(int idAgenda) {
-        this.idAgenda = idAgenda;
+    public void setAgenda(int Agenda) {
+        this.Agenda = Agenda;
     }
 
     public Date getData() {
@@ -82,15 +88,11 @@ public class Agenda {
         this.consultas = consultas;
     }
 
-    public boolean adicionarConsulta(Consulta consulta) {
-        if (consultas == null) {
-            consultas = new ArrayList<>();
-        }
-        return consultas.add(consulta);
-    }
-
     @Override
     public String toString() {
-        return "Agenda{" + "idAgenda=" + idAgenda + ", data=" + data + ", horario=" + horario + ", paciente=" + paciente + ", medico=" + medico + ", consultas=" + consultas + '}';
+        return "Agenda{" + "Agenda=" + Agenda + ", data=" + data + ", horario=" + horario + ", paciente=" + paciente + ", medico=" + medico + ", consultas=" + consultas + '}';
     }
+    
 }
+
+    

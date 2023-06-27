@@ -120,4 +120,8 @@ public class PacienteServicos {
             System.out.println("Paciente não encontrado.");
         }
     }
+
+    public boolean removerPaciente(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

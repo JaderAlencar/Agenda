@@ -9,22 +9,25 @@ package Servicos;
  * @author jader.costa
  */
 public class ServicosFactory {
-    private static PacienteServicos pacienteS = new PacienteServicos();
-    private static MedicoServicos medicoS = new MedicoServicos();
-    private static ConsultaServicos consultaS = new ConsultaServicos();
-    private static AgendaServicos agendaS = new AgendaServicos();
-    
-    public static PacienteServicos PacienteServicos (){
-        return pacienteS;
+    private static PacienteServicos paciente = new PacienteServicos();
+    private static MedicoServicos medico = new MedicoServicos();
+    private static ConsultaServicos consulta = new ConsultaServicos();
+    private static AgendaServicos agenda = new AgendaServicos();
+
+    public static PacienteServicos getPacienteServicos() {
+        return paciente;
     }
-    public static MedicoServicos MedicoServicos(){
-        return medicoS;
+
+    public static MedicoServicos getMedicoServicos() {
+        return medico;
     }
-    public static ConsultaServicos getConsultaServicos(){
-        return consultaS;
+
+    public static ConsultaServicos getConsultaServicos() {
+        return consulta;
     }
-    public static AgendaServicos getAgendaServicos (){
-        return agendaS;
+
+    public static AgendaServicos getAgendaServicos() {
+        return agenda;
     }
-    
 }
+

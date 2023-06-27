@@ -6,6 +6,7 @@ package Servicos;
 
 import DAO.DAOFactory;
 import DAO.MedicoDAO;
+import Model.Agenda;
 import Model.Medico;
 
 import java.util.ArrayList;
@@ -17,6 +18,16 @@ import java.util.List;
  */
 
 public class MedicoServicos {
+
+    public List<Agenda> getAgendas() {
+    try {
+        MedicoDAO mDAO = DAOFactory.getMedicoDAO();
+        return mDAO.getAgendas();
+    } catch (Exception e) {
+        // Tratar exceção ou propagar para o chamador do método
+        return new ArrayList<>();
+    }
+}
 
     /**
      * Realiza o cadastro de um novo médico.
@@ -109,5 +120,9 @@ public class MedicoServicos {
             // Tratar exceção ou propagar para o chamador do método
             return new ArrayList<>();
         }
+    }
+
+    public boolean removerMedico(String crm) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
